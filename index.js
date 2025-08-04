@@ -28,7 +28,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'https://attendo-eta.vercel.app/',  // <- use your actual frontend domain here
+  origin: 'https://attendo-eta.vercel.app',  // <- use your actual frontend domain here
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
