@@ -23,7 +23,7 @@ connectDB();
 
 const app = express();
 
-// ✅ CORS Configuration (Fix for production + Vercel)
+// ✅ Must be first middleware — handle CORS
 const allowedOrigins = ['https://attendo-eta.vercel.app'];
 
 app.use(cors({
@@ -34,31 +34,28 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// ✅ Handle preflight requests for all routes
+// ✅ Handle preflight OPTIONS requests globally
 app.options('*', cors());
 
-// ✅ Parse incoming JSON
+// ✅ Parse incoming JSON body
 app.use(express.json());
 
-// ✅ Static files (if needed)
+// ✅ Serve static files (optional)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ✅ Test Route
 app.get('/', (req, res) => {
-  res.send('Backend is working!');
+  res.send('Backend running...');
 });
 
 // ✅ API Routes
-app.get('/api', (req, res) => {
-  res.send('API is running...');
-});
-
 app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/attendance', attendanceRoutes);
@@ -71,13 +68,12 @@ app.use('/api/fun', funRoutes);
 app.use('/api/company-settings', companySettingsRoutes);
 app.use('/api/settings', settingsRoutes);
 
-// ✅ Custom error handling middleware
+// ✅ Error Handling
 app.use(notFound);
 app.use(errorHandler);
 
-// ✅ Server port
+// ✅ Server
 const PORT = process.env.PORT || 5001;
-
 app.listen(PORT, () => {
-  console.log(`✅ Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
