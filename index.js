@@ -24,20 +24,18 @@ connectDB();
 const app = express();
 
 // ✅ Must be first middleware — handle CORS
-const allowedOrigins = ['https://attendo-eta.vercel.app'];
+const allowedOrigins = ['https://attendo-eta.vercel.app', 'https://attendo-eta.vercel.app/'];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: ['https://attendo-eta.vercel.app', 'https://attendo-eta.vercel.app/', 'http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['set-cookie']
 }));
+
+// ✅ Handle preflight OPTIONS requests for all routes
+app.options('*', cors());
 
 // ✅ Handle preflight OPTIONS requests globally
 app.options('*', cors());
