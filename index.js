@@ -15,7 +15,6 @@ import dashboardRoutes from './routes/dashboardRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
-
 import companySettingsRoutes from './routes/companySettingsRoutes.js';
 import scannerRoutes from './routes/scannerRoutes.js';
 import funRoutes from './routes/funRoutes.js';
