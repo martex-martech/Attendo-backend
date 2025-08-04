@@ -55,16 +55,16 @@ app.get('/', (req, res) => {
 
 // ✅ API Routes
 app.use('/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/attendance', attendanceRoutes);
-app.use('/api/leaves', leaveRoutes);
-app.use('/api/dashboard', dashboardRoutes);
-app.use('/api/reports', reportRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/scanner', scannerRoutes);
-app.use('/api/fun', funRoutes);
-app.use('/api/company-settings', companySettingsRoutes);
-app.use('/api/settings', settingsRoutes);
+app.use('/users', userRoutes);
+app.use('/attendance', attendanceRoutes);
+app.use('/leaves', leaveRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/reports', reportRoutes);
+app.use('/notifications', notificationRoutes);
+app.use('/scanner', scannerRoutes);
+app.use('/fun', funRoutes);
+app.use('/company-settings', companySettingsRoutes);
+app.use('/settings', settingsRoutes);
 
 // ✅ Error Handling
 app.use(notFound);
